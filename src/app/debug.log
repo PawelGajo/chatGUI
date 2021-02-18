@@ -5,3 +5,6 @@
 [0218/172220.002:ERROR:registration_protocol_win.cc(103)] CreateFile: Nie mo¿na odnaleŸæ okreœlonego pliku. (0x2)
 [0218/172422.934:ERROR:registration_protocol_win.cc(103)] CreateFile: Nie mo¿na odnaleŸæ okreœlonego pliku. (0x2)
 [0218/172422.940:ERROR:registration_protocol_win.cc(103)] CreateFile: Nie mo¿na odnaleŸæ okreœlonego pliku. (0x2)
+[0218/200500.369:ERROR:registration_protocol_win.cc(103)] CreateFile: Nie mo¿na odnaleŸæ okreœlonego pliku. (0x2)
+[0218/200500.389:ERROR:registration_protocol_win.cc(103)] CreateFile: Nie mo¿na odnaleŸæ okreœlonego pliku. (0x2)
+[0218/200515.789:ERROR:registration_protocol_win.cc(103)] CreateFile: Nie mo¿na odnaleŸæ okreœlonego pliku. (0x2)

@@ -8,11 +8,13 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class AuthComponent implements OnInit {
   username = '';
+  rooms = ['JavaScript', 'Python', 'PHP', 'C#', 'Ruby', 'Linux']
+  selectedRoom = this.rooms[0];
   constructor(private chatService: ChatService) { }
 
 
-  auth() {
-    this.chatService.auth(this.username);
+  joinRoom() {
+    this.chatService.auth(this.username, this.selectedRoom);
   }
 
   ngOnInit(): void {

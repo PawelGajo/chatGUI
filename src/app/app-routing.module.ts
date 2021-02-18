@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatGuard } from './guards/chat.guard';
 
 const routes: Routes = [
   {
     path: 'chat',
-    component: ChatComponent
+    component: ChatComponent,
+    canActivate: [ChatGuard]
   },
   {
     path: 'auth',
@@ -21,6 +23,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+
+  ]
 })
 export class AppRoutingModule { }

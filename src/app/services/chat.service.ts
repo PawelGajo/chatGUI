@@ -34,19 +34,22 @@ export class ChatService {
       this.roomUsers.next(users);
     });
   }
-
-  leaveRoom() {
-    this.socket.emit('leaveChat');
+  clearData() {
     this.messages.next([]);
     this.room.next([]);
     this.roomUsers.next([]);
     this.username = ''
   }
-  auth(username: string) {
+  leaveRoom() {
+    this.socket.emit('leaveChat');
+    this.clearData();
+  }
+  auth(username: string, room: string) {
+    this.clearData();
     return this.http.post<any>(`${this.url}/auth/`, { username}).subscribe(
       (res) => {
         if(res.available) {
-        this.socket.emit('joinRoom', {username, room: "JavaScript"});
+        this.socket.emit('joinRoom', {username, room});
         this.username = username;
         this.router.navigate(['/chat']);
 
