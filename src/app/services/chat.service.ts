@@ -7,15 +7,17 @@ import { Socket } from 'ngx-socket-io';
   providedIn: 'root'
 })
 export class ChatService {
+  // url: string = 'https://ChatSGGW.pawelgajo.repl.co'
   url: string = 'http://localhost:3000'
   username = '';
   messages = new BehaviorSubject([])
   room = new BehaviorSubject(null)
   roomUsers = new BehaviorSubject([])
+  isUsernameAvailable = new BehaviorSubject(true)
   constructor(private http: HttpClient, private router: Router, private socket: Socket) {
     this.getMessage();
     this.getRoomUsers();
-
+    this.leaveRandom();
   }
 
   //operacja po otrzymania nowej wiadomosci z serwera
@@ -32,6 +34,15 @@ export class ChatService {
     this.socket.on('roomUsers', ({ room, users }) => {
       this.room.next(room);
       this.roomUsers.next(users);
+    });
+  }
+
+  leaveRandom(){
+    this.socket.on('leaveRandom', (message) => {
+      let currentValue = this.messages.getValue();
+      currentValue.push(message);
+      this.socket.emit('leaveRandomChatSecondUser');
+      this.messages.next(currentValue);
     });
   }
 
@@ -55,9 +66,10 @@ export class ChatService {
         this.socket.emit('joinRoom', {username, room});
         this.username = username;
         this.router.navigate(['/chat']);
+        this.isUsernameAvailable.next(true);
 
       } else {
-        console.log(`Użytkownik o nazwie ${username} już istnieje.`);
+        this.isUsernameAvailable.next(false);
       }
       });
   }
@@ -71,11 +83,21 @@ export class ChatService {
         this.username = username;
         this.socket.emit('randomChat', username);
 
+        this.isUsernameAvailable.next(true);
       } else {
-        console.log(`Użytkownik o nazwie ${username} już istnieje.`);
+        this.isUsernameAvailable.next(false);
       }
       });
   }
+
+  nextChat() {
+    this.socket.emit('leaveRandomChat');
+    this.messages.next([]);
+    this.room.next([]);
+    setTimeout(function(){ console.log() }, 600);
+    this.socket.emit('randomChat', this.username);
+  }
+
 
   goToMainPage() {
     if (confirm('Czy na pewno chcesz opuścić chat?')) {

@@ -7,6 +7,7 @@
       <div class="form-control">
         <label for="username">Nazwa użytkownika</label>
         <input type="text" [(ngModel)]="username" required name="username" placeholder="Enter username...">
+        <p class="validate-error" *ngIf="!userValidation">Użytkownik o podanej nazwie już istnieje</p>
       </div>
       <div class="form-control">
         <label for="room">Pokój</label>

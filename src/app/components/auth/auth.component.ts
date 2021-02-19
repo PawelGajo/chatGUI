@@ -10,6 +10,7 @@ export class AuthComponent implements OnInit {
   username = '';
   rooms = ['JavaScript', 'Python', 'PHP', 'C#', 'Ruby', 'Linux']
   selectedRoom = this.rooms[0];
+  userValidation = true;
   constructor(private chatService: ChatService) { }
 
 
@@ -17,10 +18,14 @@ export class AuthComponent implements OnInit {
     this.chatService.auth(this.username, this.selectedRoom);
   }
 
+  isUsernameAvailable() {
+    this.chatService.isUsernameAvailable.subscribe(val => this.userValidation = val);
+  }
   randomChat() {
     this.chatService.randomChat(this.username);
   }
   ngOnInit(): void {
+    this.isUsernameAvailable();
   }
 
 }

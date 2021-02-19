@@ -20,7 +20,7 @@ export class RandomComponent implements OnInit {
       this.messages = msgs;
       // Scroll down
     let chatMessages = document.querySelector('.chat-messages');
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatMessages.scrollTop = chatMessages.scrollHeight - chatMessages.clientHeight;
     })
   }
   getRoomName() {
@@ -42,6 +42,10 @@ export class RandomComponent implements OnInit {
   }
   leaveRoom() {
     this.chatService.goToMainPage();
+  }
+  nextChat() {
+    this.chatService.nextChat();
+
   }
   ngOnInit(): void {
     this.username = this.chatService.username;

@@ -1,12 +1,4 @@
 
-:root {
-	--dark-color-a: #667aff;
-	--dark-color-b: #7386ff;
-	--light-color: #e6e9ff;
-	--success-color: #5cb85c;
-	--error-color: #d9534f;
-}
-
 
 /* Chat Page */
 
@@ -67,6 +59,11 @@
 	background-color: var(--light-color);
 	border-radius: 5px;
 	overflow-wrap: break-word;
+}
+
+.validate-error {
+  color: var(--error-color);
+  font-weight: 800;
 }
 
 .chat-messages .message .meta {
