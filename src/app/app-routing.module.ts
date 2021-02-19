@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { RandomComponent } from './components/random/random.component';
 import { ChatGuard } from './guards/chat.guard';
 
 const routes: Routes = [
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent
+  },
+  {
+    path: 'random',
+    component: RandomComponent,
+    canActivate: [ChatGuard]
   },
   {
     path: '',

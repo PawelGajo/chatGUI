@@ -34,16 +34,19 @@ export class ChatService {
       this.roomUsers.next(users);
     });
   }
+
   clearData() {
     this.messages.next([]);
     this.room.next([]);
     this.roomUsers.next([]);
     this.username = ''
   }
+
   leaveRoom() {
     this.socket.emit('leaveChat');
     this.clearData();
   }
+
   auth(username: string, room: string) {
     this.clearData();
     return this.http.post<any>(`${this.url}/auth/`, { username}).subscribe(
@@ -52,6 +55,21 @@ export class ChatService {
         this.socket.emit('joinRoom', {username, room});
         this.username = username;
         this.router.navigate(['/chat']);
+
+      } else {
+        console.log(`Użytkownik o nazwie ${username} już istnieje.`);
+      }
+      });
+  }
+
+  randomChat(username) {
+    this.clearData();
+    return this.http.post<any>(`${this.url}/auth/`, { username}).subscribe(
+      (res) => {
+        if(res.available) {
+        this.router.navigate(['/random']);
+        this.username = username;
+        this.socket.emit('randomChat', username);
 
       } else {
         console.log(`Użytkownik o nazwie ${username} już istnieje.`);

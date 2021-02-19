@@ -3,18 +3,20 @@
     <h1><i class="fas fa-smile"></i> Chat SGGW</h1>
   </header>
   <main class="join-main">
-    <form (ngSubmit)="joinRoom()" >
+    <form  >
       <div class="form-control">
-        <label for="username">Username</label>
+        <label for="username">Nazwa użytkownika</label>
         <input type="text" [(ngModel)]="username" required name="username" placeholder="Enter username...">
       </div>
       <div class="form-control">
-        <label for="room">Room</label>
+        <label for="room">Pokój</label>
         <select name="room" id="room" [(ngModel)]="selectedRoom">
           <option *ngFor="let room of rooms" [value]="room">{{room}}</option>
         </select>
       </div>
-      <button type="submit" class="btn">Join Chat</button>
+      <button (click)="joinRoom()" class="btn btn-room">Dołącz do pokoju</button>
+      <p class="button-or">lub</p>
+      <button (click)="randomChat()" class="btn btn-random">Porozmawiaj z losową osobą</button>
     </form>
   </main>
 </div>

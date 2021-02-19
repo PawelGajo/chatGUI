@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  selector: 'app-random',
+  templateUrl: './random.component.html',
+  styleUrls: ['./random.component.css']
 })
-export class ChatComponent implements OnInit {
+export class RandomComponent implements OnInit {
   messages = [];
   room = 'Brak';
   users = [];
@@ -49,5 +49,4 @@ export class ChatComponent implements OnInit {
     this.getRoomName();
     this.getRoomUsers();
   }
-
 }

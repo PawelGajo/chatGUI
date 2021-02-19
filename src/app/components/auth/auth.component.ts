@@ -17,6 +17,9 @@ export class AuthComponent implements OnInit {
     this.chatService.auth(this.username, this.selectedRoom);
   }
 
+  randomChat() {
+    this.chatService.randomChat(this.username);
+  }
   ngOnInit(): void {
   }
 
