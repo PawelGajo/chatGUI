@@ -10,8 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { RandomComponent } from './components/random/random.component';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
-// const config: SocketIoConfig = { url: 'https://ChatSGGW.pawelgajo.repl.co', options: {} };
+// const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: 'https://ChatSGGW.pawelgajo.repl.co', options: {} };
 
 @NgModule({
   declarations: [

@@ -41,7 +41,7 @@ export class RandomComponent implements OnInit {
     this.message = '';
   }
   leaveRoom() {
-    this.chatService.goToMainPage();
+    this.chatService.leaveRandomRoom();
   }
   nextChat() {
     this.chatService.nextChat();

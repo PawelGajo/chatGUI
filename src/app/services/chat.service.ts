@@ -3,17 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
+import { ThrowStmt } from '@angular/compiler';
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  // url: string = 'https://ChatSGGW.pawelgajo.repl.co'
-  url: string = 'http://localhost:3000'
+  url: string = 'https://ChatSGGW.pawelgajo.repl.co'
+  // url: string = 'http://localhost:3000'
   username = '';
-  messages = new BehaviorSubject([])
-  room = new BehaviorSubject(null)
-  roomUsers = new BehaviorSubject([])
-  isUsernameAvailable = new BehaviorSubject(true)
+  messages = new BehaviorSubject([]);
+  room = new BehaviorSubject(null);
+  roomUsers = new BehaviorSubject([]);
+  isUsernameAvailable = new BehaviorSubject(true);
+  notificationsEnabled = false;
   constructor(private http: HttpClient, private router: Router, private socket: Socket) {
     this.getMessage();
     this.getRoomUsers();
@@ -67,7 +69,6 @@ export class ChatService {
         this.username = username;
         this.router.navigate(['/chat']);
         this.isUsernameAvailable.next(true);
-
       } else {
         this.isUsernameAvailable.next(false);
       }
@@ -102,6 +103,14 @@ export class ChatService {
   goToMainPage() {
     if (confirm('Czy na pewno chcesz opuścić chat?')) {
       this.leaveRoom();
+      this.router.navigate(['/auth']);
+    }
+  }
+
+  leaveRandomRoom() {
+    if (confirm('Czy na pewno chcesz opuścić chat?')) {
+      this.socket.emit('leaveRandomChat');
+      this.clearData();
       this.router.navigate(['/auth']);
     }
   }
